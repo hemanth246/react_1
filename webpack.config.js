@@ -7,8 +7,9 @@ const cwd = process.cwd();
 const publicDir = path.resolve(cwd, "dist");
 const isProduction = process.env.NODE_ENV === "production";
 const port = parseInt(process.env.PORT, 10) || 8089;
+const srcDir = path.join(cwd, "src");
 
-module.exports = (srcDir) => ({
+module.exports = {
   mode: isProduction ? "production" : "development",
   entry: path.resolve(srcDir, "index.js"),
   devtool: isProduction ? "eval" : "cheap-module-source-map",
@@ -96,4 +97,4 @@ module.exports = (srcDir) => ({
       filename: "index.html",
     }),
   ],
-});
+};

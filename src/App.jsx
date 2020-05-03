@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FontAwesomeIcon from "./components/FontAwesomeIcon";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class App extends Component {
   render() {
