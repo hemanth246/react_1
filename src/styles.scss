@@ -1,6 +1,75 @@
 @import "bootstrap/scss/bootstrap.scss";
 
+$color-light: #ffffff;
+$color-pink: #e91e63;
+$color-dark-grey: #2b2b2b;
+$color-light-grey: #b2b2b2;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .app-container {
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
+}
+
+.svg-container {
+  display: inline-block;
+
+  &.card-img {
+    background-color: $color-light;
+    border-radius: 6px;
+    height: 22px;
+    width: 38px;
+  }
+
+  &.social-logo {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.font-pacifico {
+  color: $color-dark-grey;
+  font-family: Pacifico, Helvetica, sans-serif;
+  font-weight: 400;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1), 7px 7px 0px rgba(0, 0, 0, 0.05);
+}
+
+.site-name {
+  font-size: 2rem;
+}
+
+.footer-section {
+  .footer-left ul li {
+    color: $color-light-grey;
+    line-height: 1.35rem;
+  }
+
+  .footer-left,
+  .footer-widget {
+    ul li {
+      font-size: 0.75rem;
+      list-style: none;
+    }
+  }
+}
+
+.payment-cc {
+  font-size: 1.25rem;
+  margin-left: 0.125rem;
+  margin-right: 0.125rem;
+}
+
+.cart-count {
+  font-family: Pacifico, Helvetica, sans-serif;
+  font-weight: 400;
+  position: absolute;
+  background: transparent;
+  color: $color-pink;
+  top: 2px;
+  right: 0;
 }
