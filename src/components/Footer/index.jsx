@@ -1,12 +1,11 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 import SocialLinks from "../SocialLinks";
 import PartnerLogos from "../PartnerLogos";
 import PaymentOptions from "../PaymentOptions";
 
 import { FOOTER, SITE_NAME } from "../../config";
-import { uuidv4 } from "../../utils";
 
 // Task -
 // 1. Add Payment options (Refer https://www.flipkart.com/ - Bottom-right corner) - Done
@@ -42,7 +41,10 @@ export default function Footer() {
           <ul>
             {INFORMATION.map((info) => (
               <li key={info.key}>
-                <a href={info.link}>{info.label}</a>
+                {/* Traditional way */}
+                {/* <a href={info.link}>{info.label}</a> */}
+                {/* React router way */}
+                <Link to={info.link}>{info.label}</Link>
               </li>
             ))}
           </ul>
