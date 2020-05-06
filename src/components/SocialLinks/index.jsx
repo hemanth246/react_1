@@ -1,35 +1,21 @@
 import React from "react";
+import cx from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { SOCIAL_MEDIA_PROFILES } from "../../config";
 
-export default function SocialLinks() {
+export default function SocialLinks({ offsetClasses = "" }) {
   return (
     <div className="footer-social row">
-      <a href={SOCIAL_MEDIA_PROFILES.facebook} className="col-1">
-        <FontAwesomeIcon
-          className="text-white"
-          icon={{ prefix: "fab", iconName: "facebook-square" }}
-        />
-      </a>
-      <a href={SOCIAL_MEDIA_PROFILES.instagram} className="col-1">
-        <FontAwesomeIcon
-          className="text-white"
-          icon={{ prefix: "fab", iconName: "instagram-square" }}
-        />
-      </a>
-      <a href={SOCIAL_MEDIA_PROFILES.pinterest} className="col-1">
-        <FontAwesomeIcon
-          className="text-white"
-          icon={{ prefix: "fab", iconName: "pinterest-square" }}
-        />
-      </a>
-      <a href={SOCIAL_MEDIA_PROFILES.twitter} className="col-1">
-        <FontAwesomeIcon
-          className="text-white"
-          icon={{ prefix: "fab", iconName: "twitter-square" }}
-        />
-      </a>
+      {SOCIAL_MEDIA_PROFILES.map((site, index) => (
+        <a
+          key={site.key}
+          href={site.link}
+          className={cx("col-1", { [offsetClasses]: index === 0 })}
+        >
+          <FontAwesomeIcon className="text-white" icon={site.icon} />
+        </a>
+      ))}
     </div>
   );
 }
