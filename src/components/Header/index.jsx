@@ -20,6 +20,8 @@ export default class Header extends Component {
     this.state = {
       showMenu: false,
       query: "",
+      catDropdown: "",
+      activeMenuItem: "",
     };
   }
 
@@ -45,29 +47,45 @@ export default class Header extends Component {
     alert(this.state.query);
   };
 
+  onMouseEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const activeMenuItem = e.currentTarget.getAttribute("data-data");
+
+    this.setState({ activeMenuItem });
+  };
+
+  onMouseLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    this.setState({ activeMenuItem: "", catDropdown: "" });
+  };
+
+  onClickCatDropdown = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const catDropdown = e.currentTarget.getAttribute("data-data");
+
+    this.setState((pS) => ({
+      catDropdown: pS.catDropdown === catDropdown ? "" : catDropdown,
+    }));
+  };
+
   render() {
-    const { showMenu } = this.state;
+    const { showMenu, catDropdown, activeMenuItem } = this.state;
 
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand font-pacifico" href="#">
           <FontAwesomeIcon icon={SITE_LOGO} size="2x" color="green" />
-          {SITE_NAME}
+          <span className="site-name">{SITE_NAME}</span>
         </a>
 
-        {/** Toggle for mobile menu */}
-        <button
-          onClick={this.toggleMenu}
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
         {/** Search box */}
-        <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
+        <form className="form-inline mt-3" onSubmit={this.onSubmit}>
           <div className="input-group mb-3">
             <input
               type="text"
@@ -92,32 +110,88 @@ export default class Header extends Component {
           </div>
         </form>
 
+        {/** Toggle for mobile menu */}
+        <button
+          onClick={this.toggleMenu}
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
         {/** menu items */}
         <div
           className={cx("collapse navbar-collapse", {
             show: showMenu,
           })}
-          id="navbarSupportedContent"
         >
           <ul className="navbar-nav ml-auto">
-            {NAV_MENU_ITEMS.map((item) => (
-              <li className="nav-item active" key={item.key}>
-                <a
-                  className={cx("nav-link", {
-                    "position-relative": item.link === "cart",
+            {NAV_MENU_ITEMS.map((item) => {
+              const hasDropdown = item.subItems.length > 0;
+              const isDropdownOpen = hasDropdown && catDropdown === item.link;
+              const isActive = activeMenuItem === item.link;
+              const linkProps = {
+                className: cx("nav-link", {
+                  "position-relative": item.link === "cart",
+                  "dropdown-toggle": hasDropdown,
+                }),
+                href: item.link,
+                "data-data": item.link,
+              };
+
+              if (hasDropdown) {
+                linkProps.onClick = this.onClickCatDropdown;
+              }
+
+              return (
+                <li
+                  className={cx("nav-item", {
+                    show: isDropdownOpen,
+                    dropdown: hasDropdown,
+                    "bg-primary": isActive,
                   })}
-                  href={item.link}
+                  data-data={item.link}
+                  onMouseEnter={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
+                  key={item.key}
                 >
-                  {item.label}
-                  {item.icon && item.iconColor && (
-                    <FontAwesomeIcon icon={item.icon} color={item.iconColor} />
+                  <a {...linkProps}>
+                    {item.label}&nbsp;
+                    {item.icon && item.iconColor && (
+                      <FontAwesomeIcon
+                        icon={item.icon}
+                        color={item.iconColor}
+                      />
+                    )}
+                    {item.link === "cart" && (
+                      <span className="cart-count">9</span>
+                    )}
+                  </a>
+                  {isDropdownOpen && (
+                    <div className="dropdown-menu show">
+                      {item.subItems.map((subItem) => {
+                        if (subItem.isDivider) {
+                          return <div className="dropdown-divider"></div>;
+                        }
+
+                        return (
+                          <a
+                            key={subItem.key ? subItem.key : uuidv4()}
+                            className="dropdown-item"
+                            href={subItem.link}
+                            data-data={subItem.label}
+                          >
+                            {subItem.label}
+                          </a>
+                        );
+                      })}
+                    </div>
                   )}
-                  {item.link === "cart" && (
-                    <span className="cart-count">9</span>
-                  )}
-                </a>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>

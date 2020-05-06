@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SocialLinks from "../SocialLinks";
 import PartnerLogos from "../PartnerLogos";
+import PaymentOptions from "../PaymentOptions";
 
 import { FOOTER, SITE_NAME } from "../../config";
+import { uuidv4 } from "../../utils";
 
 // Task -
 // 1. Add Payment options (Refer https://www.flipkart.com/ - Bottom-right corner) - Done
@@ -21,21 +23,21 @@ export default function Footer() {
         <PartnerLogos />
       </div>
 
-      <div className="row site-info mt-2 text-left border-bottom border-info">
+      <div className="row site-info mt-2 text-sm-center text-md-center text-lg-left text-xl-left border-bottom border-info">
         {/* Address */}
-        <div className="col-4 footer-left">
+        <div className="col-12 col-md-6 col-lg-4 mt-md-2 mt-sm-2 footer-left">
           <h6>Coutact Us</h6>
           <ul>
             <li>Address: {ADDRESS.address}</li>
             <li>Phone: {ADDRESS.phone}</li>
             <li>Email: {ADDRESS.email}</li>
             <li>
-              <SocialLinks />
+              <SocialLinks offsetClasses="offset-4 offset-sm-4  offset-md-4 offset-lg-0 offset-xl-0" />
             </li>
           </ul>
         </div>
         {/* Info */}
-        <div className="col-2 footer-widget">
+        <div className="col-6 col-md-3 col-lg-2 mt-md-2 mt-sm-2 footer-widget">
           <h6>Information</h6>
           <ul>
             {INFORMATION.map((info) => (
@@ -46,7 +48,7 @@ export default function Footer() {
           </ul>
         </div>
         {/* My Account */}
-        <div className="col-2 footer-widget">
+        <div className="col-6 col-md-3 col-lg-2 mt-md-2 mt-sm-2 footer-widget">
           <h6>My Account</h6>
           <ul>
             {MY_ACCOUNT.map((info) => (
@@ -56,16 +58,16 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div className="col-4 newsletter">
-          <h6>SUBSCRIBE TO OUR NEWSLETTER</h6>
-          <div className="input-group mb-3">
+        <div className="col-12 col-md-6 col-lg-4 mt-md-2 mt-sm-2 newsletter f6">
+          <h6>Subscribe to our Newsletter</h6>
+          <div className="input-group mb-3 px-3 px-sm-0">
             <input
               type="text"
-              className="form-control"
+              className="form-control f6"
               placeholder="Recipient's email"
             />
             <div className="input-group-append">
-              <span className="input-group-text" id="basic-addon2">
+              <span className="input-group-text f6" id="basic-addon2">
                 SUBSCRIBE
               </span>
             </div>
@@ -73,41 +75,14 @@ export default function Footer() {
         </div>
       </div>
       <div className="row copyright-n-payment mt-2">
-        <div className="col-6 text-left">
+        <div className="col-12 col-sm-6 text-center text-sm-left text-muted f6 mt-2">
           Copyright ©{new Date().getFullYear()},{" "}
           <span className="font-pacifico text-white">{SITE_NAME}</span>, All
           rights reserved
         </div>
         {/* TODO: Refactor this as PartnerLogs */}
-        <div className="col-6 text-right">
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-amex" }}
-          />
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-diners-club" }}
-          />
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-discover" }}
-          />
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-jcb" }}
-          />
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-mastercard" }}
-          />
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-paypal" }}
-          />
-          <FontAwesomeIcon
-            className="payment-cc"
-            icon={{ prefix: "fab", iconName: "cc-visa" }}
-          />
+        <div className="col-12 col-sm-6 text-center text-sm-right mt-2">
+          <PaymentOptions />
         </div>
       </div>
     </footer>

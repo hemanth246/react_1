@@ -67,61 +67,119 @@ export const NAV_MENU_ITEMS = [
   },
 ];
 
-export const SOCIAL_MEDIA_PROFILES = {
-  facebook: "https://www.facebook.com",
-  twitter: "https://twitter.com",
-  instagram: "https://www.instagram.com",
-  pinterest: "https://www.pinterest.com",
-};
+export const SOCIAL_MEDIA_PROFILES = [
+  {
+    key: uuidv4(),
+    title: "Facebook",
+    link: "https://www.facebook.com",
+    icon: { prefix: "fab", iconName: "facebook-square" },
+  },
+  {
+    key: uuidv4(),
+    title: "Twitter",
+    link: "https://twitter.com",
+    icon: { prefix: "fab", iconName: "twitter-square" },
+  },
+  {
+    key: uuidv4(),
+    title: "Instagram",
+    link: "https://www.instagram.com",
+    icon: { prefix: "fab", iconName: "instagram-square" },
+  },
+  {
+    key: uuidv4(),
+    title: "Pinterest",
+    link: "https://www.pinterest.com",
+    icon: { prefix: "fab", iconName: "pinterest-square" },
+  },
+];
+
+export const PAYMENT_OPTIONS = [
+  {
+    key: uuidv4(),
+    title: "AmEx",
+    icon: { prefix: "fab", iconName: "cc-amex" },
+  },
+  {
+    key: uuidv4(),
+    title: "Diners Club",
+    icon: { prefix: "fab", iconName: "cc-diners-club" },
+  },
+  {
+    key: uuidv4(),
+    title: "Discover",
+    icon: { prefix: "fab", iconName: "cc-discover" },
+  },
+  {
+    key: uuidv4(),
+    title: "JCB",
+    icon: { prefix: "fab", iconName: "cc-jcb" },
+  },
+  {
+    key: uuidv4(),
+    title: "Mastercard",
+    icon: { prefix: "fab", iconName: "cc-mastercard" },
+  },
+  {
+    key: uuidv4(),
+    title: "PayPal",
+    icon: { prefix: "fab", iconName: "cc-paypal" },
+  },
+  {
+    key: uuidv4(),
+    title: "Visa",
+    icon: { prefix: "fab", iconName: "cc-visa" },
+  },
+];
 
 export const PARTNERS = [
   {
     key: uuidv4(),
-    icon: "adobe",
+    icon: { prefix: "fab", iconName: "adobe" },
   },
   {
     key: uuidv4(),
-    icon: "airbnb",
+    icon: { prefix: "fab", iconName: "airbnb" },
   },
   {
     key: uuidv4(),
-    icon: "angular",
+    icon: { prefix: "fab", iconName: "angular" },
   },
   {
     key: uuidv4(),
-    icon: "angrycreative",
+    icon: { prefix: "fab", iconName: "angrycreative" },
   },
   {
     key: uuidv4(),
-    icon: "aviato",
+    icon: { prefix: "fab", iconName: "aviato" },
   },
   {
     key: uuidv4(),
-    icon: "autoprefixer",
+    icon: { prefix: "fab", iconName: "autoprefixer" },
   },
   {
     key: uuidv4(),
-    icon: "dhl",
+    icon: { prefix: "fab", iconName: "dhl" },
   },
   {
     key: uuidv4(),
-    icon: "ember",
+    icon: { prefix: "fab", iconName: "ember" },
   },
   {
     key: uuidv4(),
-    icon: "fedex",
+    icon: { prefix: "fab", iconName: "fedex" },
   },
   {
     key: uuidv4(),
-    icon: "git",
+    icon: { prefix: "fab", iconName: "git" },
   },
   {
     key: uuidv4(),
-    icon: "html5",
+    icon: { prefix: "fab", iconName: "html5" },
   },
   {
     key: uuidv4(),
-    icon: "js-square",
+    icon: { prefix: "fab", iconName: "js-square" },
   },
 ];
 
@@ -135,17 +193,17 @@ export const FOOTER = {
     {
       key: uuidv4(),
       label: "About Us",
-      link: "#",
+      link: "/aboutUs",
     },
     {
       key: uuidv4(),
       label: "Contact Us",
-      link: "#",
+      link: "/contactUs",
     },
     {
       key: uuidv4(),
       label: "Service Policy",
-      link: "#",
+      link: "/servicePolicies",
     },
   ],
   MY_ACCOUNT: [
