@@ -7,6 +7,10 @@ import ContactUs from "./pages/ContactUs";
 import ServicePolicies from "./pages/ServicePolicies";
 import NotFound from "./pages/NotFound";
 
+import Registration from "./pages/Registration";
+import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -18,7 +22,6 @@ export default class App extends Component {
     return (
       <Fragment>
         <Header />
-
         <Switch>
           <Route exact path="/">
             <Home />
@@ -32,11 +35,19 @@ export default class App extends Component {
           <Route path="/servicePolicies">
             <ServicePolicies />
           </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Registration />
+          </Route>
+          <Route path="/forgotPassword">
+            <ForgotPassword />
+          </Route>
           <Route path="*">
             <NotFound />
           </Route>
         </Switch>
-
         <Footer />
       </Fragment>
     );
