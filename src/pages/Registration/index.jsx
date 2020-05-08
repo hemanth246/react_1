@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import _isEmpty from "lodash/isEmpty";
+import { Link, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// Controlled vs Uncontrolled component
+import { register } from "../../server";
+
+// Controlled vs Uncontrolled component - Reactjs.org
 // Ref - Reactjs.org
+// Redirect - react-router.org
+// Spinner - html/css
 
 export default class Registration extends Component {
   constructor(props) {
@@ -11,6 +17,8 @@ export default class Registration extends Component {
     this.state = {
       username: "",
       email: "",
+
+      isLoggedIn: false,
     };
 
     this.passwordNode = React.createRef();
@@ -35,7 +43,13 @@ export default class Registration extends Component {
       }
     }
 
-    console.log("onSubmit =----> ", formData);
+    if (!_isEmpty(formData)) {
+      register(formData).then((resp) => {
+        if (resp.status === 200) {
+          this.setState({ isLoggedIn: true });
+        }
+      });
+    }
   };
 
   onBlur = (e) => {
@@ -50,9 +64,13 @@ export default class Registration extends Component {
   };
 
   render() {
+    if (this.state.isLoggedIn) {
+      return <Redirect to="/" />;
+    }
+
     return (
-      <div className="registration-page d-flex my-auto align-content-center flex-wrap">
-        <div>
+      <div className="d-flex justify-content-center align-items-center m-3">
+        <div className="registration-page">
           <form className="user-form" onSubmit={this.onSubmit}>
             <h2 className="text-center">
               <u>Create Account</u>
@@ -76,7 +94,6 @@ export default class Registration extends Component {
                   maxLength="40"
                   minLength="10"
                   required="required"
-                  title="required"
                 />
               </div>
             </div>
@@ -151,13 +168,13 @@ export default class Registration extends Component {
 
             <p className="small text-center">
               By clicking the Sign Up button, you agree to our <br />
-              <a href="/tnc">Terms &amp; Conditions</a>, and{" "}
-              <a href="/servicePolicies">Privacy Policy</a>.
+              <Link to="/tnc">Terms &amp; Conditions</Link>, and{" "}
+              <Link to="/servicePolicies">Privacy Policy</Link>.
             </p>
           </form>
 
           <div className="text-center">
-            Already have an account? <a href="/login">Login here</a>.
+            Already have an account? <Link to="/login">Login here</Link>.
           </div>
         </div>
       </div>

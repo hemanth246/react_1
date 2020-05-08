@@ -53,7 +53,30 @@ export const NAV_MENU_ITEMS = [
     icon: "user-circle",
     iconColor: "grey",
 
-    subItems: [],
+    isMyAccount: true,
+
+    subItems: [
+      {
+        key: uuidv4(),
+        label: "My Account",
+        link: "/user",
+      },
+      {
+        key: uuidv4(),
+        label: "My Addresses",
+        link: "/user/addresses",
+      },
+      {
+        key: uuidv4(),
+        label: "My Orders",
+        link: "/user/orders",
+      },
+      {
+        key: uuidv4(),
+        label: "Shopping Cart",
+        link: "/checkout/cart",
+      },
+    ],
   },
   {
     key: uuidv4(),

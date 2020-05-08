@@ -11,75 +11,65 @@ import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header, { SeesionHeader } from "./components/Header";
+import Footer, { SeesionFooter } from "./components/Footer";
 
-// BrowserRouter, Route, Switch and Link --- react-router-dom
+const MainLayout = ({ children }) => (
+  <>
+    <Header />
+    {children}
+    <Footer />
+  </>
+);
+
+const SessionLayout = ({ children }) => (
+  <div className="d-flex flex-column h-100 pl-2">
+    <SeesionHeader />
+    {children}
+    <SeesionFooter />
+  </div>
+);
 
 export default class App extends Component {
   render() {
-    // ReactRouter way
     return (
-      <Fragment>
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/aboutUs">
-            <AboutUs />
-          </Route>
-          <Route path="/contactUs">
-            <ContactUs />
-          </Route>
-          <Route path="/servicePolicies">
-            <ServicePolicies />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Registration />
-          </Route>
-          <Route path="/forgotPassword">
-            <ForgotPassword />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-        <Footer />
-      </Fragment>
+      <Switch>
+        <Route path={["/login", "/register", "/forgotPassword"]}>
+          <SessionLayout>
+            <Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/register">
+                <Registration />
+              </Route>
+              <Route path="/forgotPassword">
+                <ForgotPassword />
+              </Route>
+            </Switch>
+          </SessionLayout>
+        </Route>
+        <Route path={["/aboutUs", "/contactUs", "/servicePolicies", "/"]}>
+          <MainLayout>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/aboutUs">
+                <AboutUs />
+              </Route>
+              <Route path="/contactUs">
+                <ContactUs />
+              </Route>
+              <Route path="/servicePolicies">
+                <ServicePolicies />
+              </Route>
+            </Switch>
+          </MainLayout>
+        </Route>
+
+        <Route path="*" component={NotFound} />
+      </Switch>
     );
-
-    // const { pathname } = window.location;
-
-    // React Router equivalent
-    // if (pathname === "/") {
-    //   return <Home />;
-    // } else if (pathname === "/aboutUs") {
-    //   return <AboutUs />;
-    // } else if (pathname === "/contactUs") {
-    //   return <ContactUs />;
-    // } else if (pathname === "/servicePolicies") {
-    //   return <ServicePolicies />;
-    // } else {
-    //   return <NotFound />;
-    // }
-
-    // Traditional way
-    // return (
-    //   <Fragment>
-    //     <Header />
-    //     <div className="jumbotrond">
-    //       {pathname === "/" && <Home />}
-    //       {pathname === "/aboutUs" && <AboutUs />}
-    //       {pathname === "/contactUs" && <ContactUs />}
-    //       {pathname === "/servicePolicies" && <ServicePolicies />}
-    //       {pathname !== "/" && pathname !== "/servicePolicies" && <ServicePolicies />}
-    //     </div>
-    //     <Footer />
-    //   </Fragment>
-    // );
   }
 }
