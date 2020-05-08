@@ -33,6 +33,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
+    "react-toastify": "^6.0.0-rc.2-1",
     "rimraf": "^3.0.2",
     "sass-loader": "^8.0.2",
     "url-loader": "^4.1.0",
